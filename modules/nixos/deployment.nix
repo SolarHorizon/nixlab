@@ -29,6 +29,8 @@
         ];
       }
     ];
+
+    nix.settings.trusted-users = ["deploy"];
   };
 
   flake.deploy.nodes =

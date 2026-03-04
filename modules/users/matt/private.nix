@@ -13,6 +13,10 @@
 
   flake.modules.homeManager.matt-private = {config, ...}: {
     sops.secrets = {
+      "ssh/id_ed25519" = {
+        path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+        mode = "0600";
+      };
       "ssh/id_ed25519_sk" = {
         path = "${config.home.homeDirectory}/.ssh/id_ed25519_sk";
         mode = "0600";

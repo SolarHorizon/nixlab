@@ -2,6 +2,7 @@
   flake.modules.nixos.floodgate = {
     imports = with self.modules.nixos; [
       profile-cli
+      deployment
       grub
     ];
 

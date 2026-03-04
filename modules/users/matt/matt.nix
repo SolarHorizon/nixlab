@@ -6,19 +6,19 @@
   flake.modules = lib.mkMerge [
     (self.factory.user "matt" true)
     {
+      nixos.matt = {
+        users.users.matt.openssh.authorizedKeys.keys = [
+          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIEKgb6TlmKSuBHEb9HZ8hn6DLYbMXBOH6Gua9cSr2ZslAAAABHNzaDo= matt@yubikey-primary"
+          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIDwzPPg/ESf2bVbbIwj1adbkVcmg4DeijjROk5A6oUIGAAAABHNzaDo= matt@yubikey-backup"
+        ];
+      };
+
       homeManager.matt = {
         imports = with self.modules.homeManager; [
           nixvim
           zsh
           git
         ];
-
-        programs.git.settings.user = {
-          email = "matt@solarhorizon.dev";
-          name = "Matt";
-        };
-
-        home.stateVersion = "25.11";
       };
     }
   ];

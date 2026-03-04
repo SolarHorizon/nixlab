@@ -2,10 +2,11 @@
   flake.modules.nixos.profile-cli = {config, ...}: {
     imports = with self.modules.nixos; [
       profile-default
-      zsh
+      _1password
+      ssh
       tailscale
       yubikey
-      _1password
+      zsh
     ];
 
     services.fwupd.enable = true;
@@ -16,6 +17,8 @@
 
   flake.modules.homeManager.profile-cli = {
     imports = with self.modules.homeManager; [
+      profile-default
+      ssh
       zsh
     ];
   };

@@ -4,10 +4,11 @@
       profile-kde
       wireless
       limine
-      matt
     ];
 
-    services.fprintd.enable = true;
+    home-manager.sharedModules = with self.modules.homeManager; [
+      profile-kde
+    ];
 
     system.stateVersion = "25.05";
   };

@@ -3,6 +3,7 @@
     imports = with self.modules.nixos; [
       profile-cli
       _1password-gui
+      yubikey-gui
     ];
 
     programs.firefox.enable = true;
@@ -44,8 +45,8 @@
       discord
       slack
       spotify
-      thunderbird
       kdePackages.kdenlive
+      thunderbird
       mpv
       jellyfin-mpv-shim
       piper

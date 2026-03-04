@@ -33,6 +33,7 @@
       {device = "/dev/disk/by-uuid/8e468424-6a27-4c75-af3e-93e20f147c4c";}
     ];
 
+    hardware.bluetooth.enable = true;
     hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }

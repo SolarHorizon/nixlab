@@ -1,5 +1,9 @@
-{lib, ...}: {
-  flake.modules.nixos.profile-minimal = {pkgs, ...}: {
+{
+  flake.modules.nixos.profile-minimal = {
+    pkgs,
+    lib,
+    ...
+  }: {
     i18n.defaultLocale = "en_US.UTF-8";
     time.timeZone = "America/New_York";
 
@@ -11,5 +15,19 @@
     ];
 
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  };
+
+  flake.modules.homeManager.profile-minimal = {
+    config,
+    pkgs,
+    lib,
+    ...
+  }: {
+    home.homeDirectory =
+      if pkgs.stdenv.isDarwin
+      then
+        (lib.mkForce
+          "/Users/${config.home.username}")
+      else "/home/${config.home.username}";
   };
 }

@@ -5,6 +5,14 @@
       home-manager
       test-vm
       networking
+      sops
+    ];
+  };
+
+  flake.modules.homeManager.profile-default = {
+    imports = with self.modules.homeManager; [
+      profile-minimal
+      sops
     ];
   };
 }

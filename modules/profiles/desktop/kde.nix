@@ -21,4 +21,10 @@
     services.desktopManager.plasma6.enable = true;
     services.xserver.enable = true;
   };
+
+  flake.modules.homeManager.profile-kde = {
+    imports = with self.modules.homeManager; [
+      profile-desktop
+    ];
+  };
 }

@@ -1,5 +1,5 @@
-{lib, ...}: {
-  flake.modules.nixos.networking = {
+{
+  flake.modules.nixos.networking = {lib, ...}: {
     networking = {
       networkmanager.enable = true;
       nftables.enable = true;

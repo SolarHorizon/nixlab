@@ -26,7 +26,9 @@
         ];
       };
 
-      programs._1password-gui.polkitPolicyOwners = [username];
+      programs._1password-gui.polkitPolicyOwners =
+        lib.mkIf
+        config.programs._1password-gui.enable [username];
     };
 
     homeManager."${username}" = {

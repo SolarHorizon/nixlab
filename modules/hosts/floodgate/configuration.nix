@@ -4,6 +4,7 @@
       profile-cli
       deployment
       grub
+      caddy
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [

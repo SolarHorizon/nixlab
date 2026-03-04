@@ -3,10 +3,15 @@
   lib,
   ...
 }: {
-  flake.modules.nixos.deployment = {config, ...}: {
+  flake.modules.nixos.deployment = {
+    config,
+    pkgs,
+    ...
+  }: {
     users.users.deploy = {
       isSystemUser = true;
       group = "deploy";
+      shell = pkgs.bash;
       openssh.authorizedKeys.keys =
         config.users.users.matt.openssh.authorizedKeys.keys;
     };
@@ -52,7 +57,8 @@
         path = deployPkgs.deploy-rs.lib.activate.nixos config;
       };
     })
-    inputs.self.nixosConfigurations;
+    (lib.filterAttrs (_: config: config.config.users.users ? deploy)
+      inputs.self.nixosConfigurations);
 
   flake.checks =
     builtins.mapAttrs (

@@ -5,7 +5,7 @@
       _1password
       ssh
       tailscale
-      yubikey
+      yubikey-cli
       zsh
     ];
 

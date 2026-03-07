@@ -3,17 +3,29 @@
   lib,
   ...
 }: {
-  flake.modules.nixos.deployment = {
+  flake.modules.homeManager.deployment-auth = {
     config,
     pkgs,
     ...
   }: {
+    home.packages = with pkgs; [
+      deploy-rs
+    ];
+
+    sops.secrets."ssh/deploy_key" = {
+      path = "${config.home.homeDirectory}/.ssh/deploy_key";
+      mode = "0600";
+    };
+  };
+
+  flake.modules.nixos.deployment = {pkgs, ...}: {
     users.users.deploy = {
       isSystemUser = true;
       group = "deploy";
       shell = pkgs.bash;
-      openssh.authorizedKeys.keys =
-        config.users.users.matt.openssh.authorizedKeys.keys;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH1B4bByBCRr2ZUMOqRoiuCy6NtpWTOfbIq5mKPKPZkx deploy@nixlab"
+      ];
     };
 
     users.groups.deploy = {};
@@ -53,6 +65,7 @@
     in {
       hostname = host;
       sshUser = "deploy";
+      sshOpts = ["-i" "~/.ssh/deploy_key"];
 
       profiles.system = {
         user = "root";

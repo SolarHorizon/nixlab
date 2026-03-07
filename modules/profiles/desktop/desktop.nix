@@ -3,11 +3,12 @@
     imports = with self.modules.nixos; [
       profile-cli
       _1password-gui
-      yubikey-gui
+      yubikey-desktop
     ];
 
     programs.firefox.enable = true;
     programs.kdeconnect.enable = true;
+    programs.ssh.startAgent = true;
 
     fonts = {
       fontconfig = {

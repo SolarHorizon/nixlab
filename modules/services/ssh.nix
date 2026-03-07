@@ -1,4 +1,4 @@
-{
+{self, ...}: {
   flake.modules.nixos.ssh = {
     services.openssh = {
       enable = true;
@@ -11,18 +11,31 @@
     };
   };
 
-  flake.modules.homeManager.ssh = {osConfig, ...}: {
+  flake.modules.homeManager.ssh = {
+    lib,
+    osConfig,
+    ...
+  }: {
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = {
-        "*" = {
-          hashKnownHosts = true;
-        };
-        "*.ts.net" = {
-          forwardAgent = osConfig.services.tailscale.enable;
-        };
-      };
+      matchBlocks = lib.mkMerge [
+        {
+          "*" = {
+            addKeysToAgent = "yes";
+            hashKnownHosts = true;
+          };
+        }
+        (lib.mkIf (osConfig != null && osConfig.services.tailscale.enable) (
+          lib.mapAttrs'
+          (name: _: {
+            name = name;
+            value.forwardAgent = true;
+          })
+          (lib.filterAttrs (name: cfg: cfg.config.services.tailscale.enable)
+            self.nixosConfigurations)
+        ))
+      ];
     };
   };
 }

@@ -1,4 +1,4 @@
-{
+{lib, ...}: {
   flake.modules.nixos.zsh = {pkgs, ...}: {
     environment.shells = [
       pkgs.zsh
@@ -13,6 +13,11 @@
       enableCompletion = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
+      interactiveShellInit = lib.mkAfter ''
+        if [[ -n $SSH_CONNECTION ]]; then
+        	PROMPT="%{$fg_bold[yellow]%}%m%{$reset_color%} $PROMPT"
+        fi
+      '';
     };
 
     programs.zsh.ohMyZsh = {

@@ -4,6 +4,7 @@
       profile-kde
       wireless
       limine
+      yubikey-auto-lock
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [

@@ -2,6 +2,7 @@
   flake.modules.nixos.framework = {config, ...}: {
     imports = with self.modules.nixos; [
       matt-private
+      minecraft
     ];
 
     sops.secrets."users/matt/hashedPassword".neededForUsers = true;

@@ -17,3 +17,8 @@ creation_rules:
       - age:
         - *admin_matt
         - *host_floodgate
+  - path_regex: secrets/services/minecraft.yaml
+    key_groups:
+      - age:
+        - *admin_matt
+        - *host_floodgate

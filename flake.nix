@@ -9,7 +9,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
     nixvim.url = "github:nix-community/nixvim/main";
-    nix-minecraft = "github:Infinidoge/nix-minecraft";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     _1password-shell-plugins = {
       url = "github:/1password/shell-plugins";

@@ -2,7 +2,6 @@
   flake.modules.nixos.framework = {config, ...}: {
     imports = with self.modules.nixos; [
       matt-private
-      minecraft
     ];
 
     sops.secrets."users/matt/hashedPassword".neededForUsers = true;
@@ -12,6 +11,10 @@
     };
 
     home-manager.users.matt = {
+      imports = with self.modules.homeManager; [
+        minecraft
+      ];
+
       home.stateVersion = "25.11";
     };
   };

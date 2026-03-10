@@ -1,8 +1,4 @@
-{
-  inputs,
-  withSystem,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.flake-parts.flakeModules.modules
     inputs.pkgs-by-name-for-flake-parts.flakeModule
@@ -13,7 +9,6 @@
   ];
 
   perSystem = {pkgs, ...}: {
-    # pkgsDirectory = ../packages;
     formatter = pkgs.alejandra;
   };
 

@@ -14,6 +14,7 @@
 
     sops.secrets."velocity/forwardingSecret" = {
       owner = "minecraft";
+      sopsFile = ../../../secrets/services/minecraft.yaml;
     };
 
     services.minecraft-servers = {

@@ -4,6 +4,8 @@
       profile-server
       grub
       caddy
+      minecraft
+      minecraft-cobbleverse
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [

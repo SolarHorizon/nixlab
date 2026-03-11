@@ -60,6 +60,11 @@
         loaderVersion = "0.18.4";
       };
 
+      serverProperties = {
+        allow-flight = true;
+        enable-command-blocks = true;
+      };
+
       # Symlink immutable content — mods and resource packs don't need to be writable
       # Resource packs are included because globalpacks mod serves them to clients
       symlinks =

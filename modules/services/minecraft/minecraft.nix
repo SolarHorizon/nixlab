@@ -1,5 +1,6 @@
 {inputs, ...}: {
-  flake.modules.nixos.minecraft = {pkgs, ...}: {
+  flake.modules.nixos.minecraft = {pkgs, ...}: let
+  in {
     imports = [
       inputs.nix-minecraft.nixosModules.minecraft-servers
     ];
@@ -9,6 +10,9 @@
     ];
 
     environment.systemPackages = with pkgs; [
+      (writeShellScriptBin "mc-console" ''
+        su minecraft -s $SHELL -c "tmux -S /run/minecraft/${1}.sock attach"
+      '')
       tmux
     ];
 

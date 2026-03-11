@@ -10,6 +10,7 @@
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
     nixvim.url = "github:nix-community/nixvim/main";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    claude-code-nix.url = "github:sadjow/claude-code-nix";
 
     _1password-shell-plugins = {
       url = "github:/1password/shell-plugins";

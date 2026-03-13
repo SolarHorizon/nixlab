@@ -3,12 +3,7 @@
   lib,
   ...
 }: {
-  options.flake.u2fKeys = lib.mkOption {
-    type = lib.types.attrsOf (lib.types.listOf lib.types.str);
-    default = {};
-  };
-
-  config.flake.modules.nixos.yubikey-cli = {pkgs, ...}: {
+  flake.modules.nixos.yubikey-cli = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       yubikey-manager
     ];
@@ -30,16 +25,11 @@
         cue_prompt = "Touch your security key";
         authfile = pkgs.writeText "u2f-mappings" (
           let
-            users =
-              lib.sort lib.lessThan (lib.attrNames
-                self.u2fKeys);
-
             lines =
-              map (
-                user:
-                  user + lib.concatStrings self.u2fKeys.${user}
-              )
-              users;
+              map (user: user + lib.concatStrings self.keys.${user}.u2f)
+              (lib.sort lib.lessThan
+                (lib.filter (user: (self.keys.${user}.u2f or []) != [])
+                  (lib.attrNames self.keys)));
           in
             lib.concatStringsSep "\n" lines + "\n"
         );
@@ -53,7 +43,7 @@
     };
   };
 
-  config.flake.modules.nixos.yubikey-desktop = {pkgs, ...}: {
+  flake.modules.nixos.yubikey-desktop = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       yubioath-flutter
     ];
@@ -64,7 +54,7 @@
     };
   };
 
-  config.flake.modules.nixos.yubikey-server = {
+  flake.modules.nixos.yubikey-server = {
     security.pam.rssh.enable = true;
     security.pam.services.sudo.rssh = true;
     security.sudo.extraConfig = ''

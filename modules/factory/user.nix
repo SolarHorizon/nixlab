@@ -17,6 +17,7 @@
           ++ lib.optionals config.networking.networkmanager.enable [
             "networkmanager"
           ];
+        openssh.authorizedKeys.keys = self.keys."${username}".ssh;
         shell = pkgs.zsh;
       };
 

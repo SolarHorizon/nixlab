@@ -10,20 +10,9 @@
     };
   };
 
-  flake.modules.homeManager.sops = {
-    config,
-    pkgs,
-    ...
-  }: {
+  flake.modules.homeManager.sops = {config, ...}: {
     imports = [
       inputs.sops-nix.homeManagerModules.sops
-    ];
-
-    home.packages = with pkgs; [
-      age
-      sops
-      ssh-to-age
-      ssh-to-pgp
     ];
 
     sops = {

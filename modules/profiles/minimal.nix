@@ -12,6 +12,7 @@
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
+      "pipe-operators"
     ];
 
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;

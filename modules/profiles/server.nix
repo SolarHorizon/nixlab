@@ -3,7 +3,6 @@
     imports = with self.modules.nixos; [
       profile-cli
       yubikey-server
-      deployment
     ];
   };
 

@@ -1,6 +1,5 @@
 {inputs, ...}: {
-  flake.modules.nixos.minecraft = {pkgs, ...}: let
-  in {
+  flake.modules.nixos.minecraft = {pkgs, ...}: {
     imports = [
       inputs.nix-minecraft.nixosModules.minecraft-servers
     ];
@@ -30,9 +29,14 @@
 
   flake.modules.homeManager.minecraft = {pkgs, ...}: {
     home.packages = with pkgs; [
+      prismlauncher
+    ];
+  };
+
+  flake.modules.homeManager.minecraft-tools = {pkgs, ...}: {
+    home.packages = with pkgs; [
       packwiz
       mcaselector
-      prismlauncher
     ];
   };
 }

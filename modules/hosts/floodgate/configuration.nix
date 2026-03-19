@@ -1,4 +1,9 @@
 {self, ...}: {
+  hosts.nixos.floodgate = {
+    autoUpdate.enable = true;
+    autoUpdate.strategy = "push";
+  };
+
   flake.modules.nixos.floodgate = {
     imports = with self.modules.nixos; [
       profile-server
@@ -12,6 +17,8 @@
       profile-cli
     ];
 
+    hardware.facter.reportPath = ./facter.json;
+
     system.stateVersion = "25.11";
 
     # TODO: legacy options, check what they're for and refactor
@@ -19,5 +26,5 @@
     services.logrotate.checkConfig = false;
   };
 
-  flake.nixosConfigurations = self.lib.mkNixos "x86_64-linux" "floodgate";
+  # flake.nixosConfigurations = self.lib.mkNixos "x86_64-linux" "floodgate";
 }

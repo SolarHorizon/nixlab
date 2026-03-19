@@ -3,20 +3,20 @@
 # to /etc/nixos/configuration.nix instead.
 {inputs, ...}: {
   flake.modules.nixos.framework = {
-    config,
-    lib,
-    modulesPath,
+    # config,
+    # lib,
+    # modulesPath,
     ...
   }: {
     imports = [
-      (modulesPath + "/installer/scan/not-detected.nix")
+      # (modulesPath + "/installer/scan/not-detected.nix")
       inputs.nixos-hardware.nixosModules.framework-16-7040-amd
     ];
 
-    boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod"];
-    boot.initrd.kernelModules = [];
-    boot.kernelModules = ["kvm-amd"];
-    boot.extraModulePackages = [];
+    # boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod"];
+    # boot.initrd.kernelModules = [];
+    # boot.kernelModules = ["kvm-amd"];
+    # boot.extraModulePackages = [];
 
     fileSystems."/" = {
       device = "/dev/disk/by-uuid/32b51a3a-d2b2-47a9-be69-d6fab90b430d";
@@ -34,6 +34,8 @@
     ];
 
     hardware.bluetooth.enable = true;
-    hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    # hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+    hardware.facter.reportPath = ./facter.json;
   };
 }

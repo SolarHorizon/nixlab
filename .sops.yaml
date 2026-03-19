@@ -1,21 +1,28 @@
 keys:
   - &admin_matt age14fqy65mt6fr0sakrmw05cy73amatkrqq2lhx3h57csh66txkee0qr8hugt
   - &host_framework age175v84l44utasp9l62lfmjut8xnm6hh5u8sp7e6al0qvcvxwzyg4q9f4x8p
+  - &host_theseus age175v84l44utasp9l62lfmjut8xnm6hh5u8sp7e6al0qvcvxwzyg4q9f4x8p
   - &host_floodgate age10km7dp5nqkt5rpck8rtm3p82hygax05n8lup47adxgftn8fj4y8sq2yd9x
 creation_rules:
   - path_regex: secrets/users/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
         - *admin_matt
+  - path_regex: secrets/hosts/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+        - *admin_matt
   - path_regex: secrets/hosts/framework.yaml
     key_groups:
       - age:
-        - *admin_matt
         - *host_framework
+  - path_regex: secrets/hosts/theseus.yaml
+    key_groups:
+      - age:
+        - *host_theseus
   - path_regex: secrets/hosts/floodgate.yaml
     key_groups:
       - age:
-        - *admin_matt
         - *host_floodgate
   - path_regex: secrets/services/minecraft.yaml
     key_groups:

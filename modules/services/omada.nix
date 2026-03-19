@@ -1,10 +1,27 @@
 {lib, ...}: {
   flake.modules.nixos.omada = {config, ...}: let
+    dataPath = "/var/lib/omada";
+
     manageHttpsPort = 8043;
     manageHttpPort = 8088;
     portalHttpsPort = 8843;
     portalHttpPort = manageHttpPort;
+
+    uid = 508;
+    user = "omada";
+
+    gid = uid;
+    group = user;
   in {
+    users.users.${user} = {
+      inherit uid group;
+      isSystemUser = true;
+    };
+
+    users.groups.${group} = {
+      inherit gid;
+    };
+
     virtualisation.oci-containers.containers.omada-controller = {
       image = "mbentley/omada-controller:6.1";
       environment = {
@@ -13,15 +30,17 @@
         PORTAL_HTTP_PORT = toString portalHttpPort;
         MANAGE_HTTPS_PORT = toString manageHttpsPort;
         MANAGE_HTTP_PORT = toString manageHttpPort;
+        ROOTLESS = "true";
       };
       volumes = [
-        "/var/lib/omada/data:/opt/tplink/EAPController/data"
-        "/var/lib/omada/logs:/opt/tplink/EAPController/logs"
+        "${dataPath}/data:/opt/tplink/EAPController/data"
+        "${dataPath}/logs:/opt/tplink/EAPController/logs"
       ];
       extraOptions = [
         "--network=host"
         "--stop-timeout=60"
         "--ulimit nofile=4096:8192"
+        "--user=${toString uid}:${toString gid}"
       ];
     };
 
@@ -45,5 +64,11 @@
         29810 # device discovery
       ];
     };
+
+    systemd.tmpfiles.rules = [
+      "d ${dataPath} 0755 ${user} ${group} -"
+      "d ${dataPath}/data 0755 ${user} ${group} -"
+      "d ${dataPath}/logs 0755 ${user} ${group} -"
+    ];
   };
 }

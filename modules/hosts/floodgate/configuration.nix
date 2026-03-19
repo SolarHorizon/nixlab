@@ -14,7 +14,7 @@
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [
-      profile-cli
+      profile-server
     ];
 
     hardware.facter.reportPath = ./facter.json;

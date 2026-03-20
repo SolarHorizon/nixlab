@@ -30,7 +30,7 @@ in {
     );
   };
 
-  config.flake.modules.nixos.profile-default = {
+  config.flake.modules.nixos.role-base = {
     imports = with self.modules.nixos; [
       deployment-strategies
     ];

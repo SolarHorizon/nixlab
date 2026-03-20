@@ -1,7 +1,7 @@
 {self, ...}: {
-  flake.modules.nixos.profile-kde = {pkgs, ...}: {
+  flake.modules.nixos.role-kde = {pkgs, ...}: {
     imports = with self.modules.nixos; [
-      profile-desktop
+      role-desktop
     ];
 
     environment.systemPackages = with pkgs; [
@@ -22,9 +22,9 @@
     services.xserver.enable = true;
   };
 
-  flake.modules.homeManager.profile-kde = {
+  flake.modules.homeManager.role-kde = {
     imports = with self.modules.homeManager; [
-      profile-desktop
+      role-desktop
     ];
   };
 }

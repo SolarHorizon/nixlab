@@ -6,7 +6,7 @@
 
   flake.modules.nixos.monolith = {
     imports = with self.modules.nixos; [
-      profile-server
+      role-server
       systemd-boot
       media-server
       caddy-internal
@@ -16,7 +16,7 @@
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [
-      profile-server
+      role-server
     ];
 
     system.stateVersion = "24.05";

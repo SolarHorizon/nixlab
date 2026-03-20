@@ -6,17 +6,20 @@
 
   flake.modules.nixos.framework = {
     imports = with self.modules.nixos; [
-      profile-kde
+      role-kde
       wireless
       limine
       yubikey-auto-lock
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [
-      profile-kde
+      role-kde
     ];
 
     services.fprintd.enable = false;
+
+    networking.wireless.iwd.enable = true;
+    networking.networkmanager.wifi.backend = "iwd";
 
     system.stateVersion = "25.05";
   };

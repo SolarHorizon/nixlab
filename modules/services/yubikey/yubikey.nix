@@ -3,7 +3,21 @@
   lib,
   ...
 }: {
+  flake.modules.nixos.yubikey-ssh = {config, ...}:
+    lib.mkIf
+    config.services.openssh.enable {
+      security.pam.rssh.enable = true;
+      security.pam.services.sudo.rssh = true;
+      security.sudo.extraConfig = ''
+        Defaults env_keep+=SSH_AUTH_SOCK
+      '';
+    };
+
   flake.modules.nixos.yubikey-cli = {pkgs, ...}: {
+    imports = with self.modules.nixos; [
+      yubikey-ssh
+    ];
+
     environment.systemPackages = with pkgs; [
       yubikey-manager
     ];
@@ -52,13 +66,5 @@
       polkit-1.u2fAuth = true;
       kde.u2fAuth = true;
     };
-  };
-
-  flake.modules.nixos.yubikey-server = {
-    security.pam.rssh.enable = true;
-    security.pam.services.sudo.rssh = true;
-    security.sudo.extraConfig = ''
-      Defaults env_keep+=SSH_AUTH_SOCK
-    '';
   };
 }

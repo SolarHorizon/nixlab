@@ -6,7 +6,7 @@
 
   flake.modules.nixos.floodgate = {
     imports = with self.modules.nixos; [
-      profile-server
+      role-server
       grub
       caddy-external
       minecraft
@@ -14,7 +14,7 @@
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [
-      profile-server
+      role-server
     ];
 
     hardware.facter.reportPath = ./facter.json;

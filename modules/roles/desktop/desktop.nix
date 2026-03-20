@@ -1,14 +1,19 @@
 {self, ...}: {
-  flake.modules.nixos.profile-desktop = {pkgs, ...}: {
+  flake.modules.nixos.role-desktop = {pkgs, ...}: {
     imports = with self.modules.nixos; [
-      profile-cli
+      role-base
+      tailscale
+      _1password
       _1password-gui
+      yubikey-cli
       yubikey-desktop
     ];
 
     programs.firefox.enable = true;
     programs.kdeconnect.enable = true;
     programs.ssh.startAgent = true;
+
+    networking.networkmanager.enable = true;
 
     fonts = {
       fontconfig = {
@@ -21,25 +26,27 @@
 
     services.printing.enable = true;
     services.flatpak.enable = true;
-
-    services.xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
-
+    services.fwupd.enable = true;
     services.pulseaudio.enable = false;
-    security.rtkit.enable = true;
+
     services.pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+
+    services.xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+
+    security.rtkit.enable = true;
   };
 
-  flake.modules.homeManager.profile-desktop = {pkgs, ...}: {
+  flake.modules.homeManager.role-desktop = {pkgs, ...}: {
     imports = with self.modules.homeManager; [
-      profile-cli
+      role-base
     ];
 
     home.packages = with pkgs; [
@@ -53,12 +60,9 @@
       piper
       moonlight-qt
       # alsa-scarlett-gui # desktop-only audio
-      # local.nix-modrinth-prefetch # gaming module
       # looking-glass-client # looking-glass module
       # protontricks # gaming module
       # retroarch-full # gaming/emulation module
-      # unstable.mcaselector # gaming module
-      # unstable.packwiz # gaming module
       # unstable.r2modman # gaming module
     ];
   };

@@ -7,7 +7,6 @@
   flake.modules.nixos.framework = {
     imports = with self.modules.nixos; [
       role-kde
-      wireless
       limine
       yubikey-auto-lock
     ];

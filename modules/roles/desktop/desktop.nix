@@ -26,7 +26,6 @@
 
     services.printing.enable = true;
     services.flatpak.enable = true;
-    services.fwupd.enable = true;
     services.pulseaudio.enable = false;
 
     services.pipewire = {

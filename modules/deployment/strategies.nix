@@ -1,6 +1,7 @@
 {lib, ...}: {
   flake.modules.nixos.deployment-strategies = {
     hostConfig,
+    config,
     pkgs,
     ...
   }: let
@@ -32,9 +33,12 @@
           isSystemUser = true;
           group = "deploy";
           shell = pkgs.bash;
-          openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH1B4bByBCRr2ZUMOqRoiuCy6NtpWTOfbIq5mKPKPZkx deploy@nixlab"
-          ];
+          openssh.authorizedKeys.keys =
+            lib.throwIf (!config.services.openssh.enable)
+            "`hosts.nixos.${hostConfig.name}.autoUpdate.flake` must be set when strategy is \"pull\""
+            [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH1B4bByBCRr2ZUMOqRoiuCy6NtpWTOfbIq5mKPKPZkx deploy@nixlab"
+            ];
         };
 
         users.groups.deploy = {};

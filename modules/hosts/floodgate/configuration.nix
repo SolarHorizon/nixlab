@@ -17,6 +17,8 @@
       role-server
     ];
 
+    services.fwupd.enable = false;
+
     hardware.facter.reportPath = ./facter.json;
 
     system.stateVersion = "25.11";

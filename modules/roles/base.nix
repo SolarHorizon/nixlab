@@ -7,7 +7,6 @@
     imports = with self.modules.nixos; [
       home-manager
       test-vm
-      networking
       sops
       zsh
     ];

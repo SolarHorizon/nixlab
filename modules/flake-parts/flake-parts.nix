@@ -24,6 +24,6 @@
       ...
     }: {
       local = config.packages;
-      unstable = import inputs.nixpkgs-unstable {inherit system config;};
+      unstable = import inputs.nixpkgs-unstable {inherit system;};
     });
 }

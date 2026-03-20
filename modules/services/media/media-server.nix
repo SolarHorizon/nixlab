@@ -22,14 +22,8 @@
       self.modules.generic.media-server
     ];
 
-    users.${group}.media = {
+    users.groups.${group} = {
       inherit gid;
     };
-
-    systemd.tmpfiles.rules = [
-      "d /mnt/mergerfs/media 2775 root ${group} -"
-      "d /mnt/mergerfs/media/movies 2775 root ${group} -"
-      "d /mnt/mergerfs/media/tv 2775 root ${group} -"
-    ];
   };
 }

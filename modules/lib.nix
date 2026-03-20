@@ -9,18 +9,6 @@
   };
 
   config.flake.lib = {
-    mkNixos = system: name: {
-      ${name} = inputs.nixpkgs.lib.nixosSystem {
-        modules = [
-          inputs.self.modules.nixos.${name}
-          {
-            networking.hostName = name;
-            nixpkgs.hostPlatform = lib.mkDefault system;
-          }
-        ];
-      };
-    };
-
     mkHomeManager = system: name: {
       ${name} = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -30,6 +18,17 @@
       };
     };
 
-    allowPkgs = pkg: builtins.elem (lib.getName pkg);
+    mkReverseProxy = {
+      domain,
+      host,
+      port,
+    }: {
+      services.caddy.virtualHosts.${domain}.extraConfig = ''
+        reverse_proxy ${host}:${toString port} {
+        	header_down X-Real-IP {http.request.remote}
+        	header_down X-Forwarded-For {http.request.remote}
+        }
+      '';
+    };
   };
 }

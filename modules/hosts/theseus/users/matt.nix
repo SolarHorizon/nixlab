@@ -13,6 +13,7 @@
     home-manager.users.matt = {
       imports = with self.modules.homeManager; [
         minecraft
+        libreoffice
       ];
 
       home.stateVersion = "25.11";

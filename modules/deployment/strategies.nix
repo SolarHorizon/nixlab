@@ -5,11 +5,12 @@
     ...
   }: let
     autoUpdate = hostConfig.autoUpdate;
-    enabled = autoUpdate.enable && autoUpdate.strategy == "push";
+    pushEnabled = autoUpdate.enable && autoUpdate.strategy == "push";
+    pullEnabled = autoUpdate.enable && autoUpdate.strategy == "pull";
   in
     lib.mkMerge [
       # pull strategy
-      (lib.mkIf enabled {
+      (lib.mkIf pullEnabled {
         system.autoUpgrade = {
           enable = true;
           flake =
@@ -26,7 +27,7 @@
       })
 
       # push strategy
-      (lib.mkIf enabled {
+      (lib.mkIf pushEnabled {
         users.users.deploy = {
           isSystemUser = true;
           group = "deploy";

@@ -1,14 +1,16 @@
 {
-  self,
   inputs,
+  lib,
   ...
-}: {
+}: let
+  getPkgNames = pkg: builtins.elem (lib.getName pkg);
+in {
   flake.modules.nixos._1password = {config, ...}: {
     imports = [
       inputs._1password-shell-plugins.nixosModules.default
     ];
 
-    nixpkgs.config.allowUnfreePredicate = self.lib.allowPkgs [
+    nixpkgs.config.allowUnfreePredicate = getPkgNames [
       config.programs._1password.package
     ];
 
@@ -17,7 +19,7 @@
   };
 
   flake.modules.nixos._1password-gui = {config, ...}: {
-    nixpkgs.config.allowUnfreePredicate = self.lib.allowPkgs [
+    nixpkgs.config.allowUnfreePredicate = getPkgNames [
       config.programs._1password-gui.package
     ];
 

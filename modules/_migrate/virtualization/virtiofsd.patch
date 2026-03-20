@@ -1,0 +1,28 @@
+From b201517983b0d5000a67574afcba14463217ce0e Mon Sep 17 00:00:00 2001
+From: SolarHorizon <matt@solarhorizon.dev>
+Date: Sat, 16 Aug 2025 18:26:43 -0400
+Subject: [PATCH] bump vm-memory to 0.16.2
+
+---
+ Cargo.lock | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Cargo.lock b/Cargo.lock
+index 2a6b4ac..42f4a11 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -899,9 +899,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "vm-memory"
+-version = "0.16.0"
++version = "0.16.2"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "e2919f87420b6998a131eb7c78843890295e91a3f8f786ccc925c8d387b75121"
++checksum = "1fd5e56d48353c5f54ef50bd158a0452fc82f5383da840f7b8efc31695dd3b9d"
+ dependencies = [
+  "arc-swap",
+  "bitflags 2.4.1",
+-- 
+2.49.0
+

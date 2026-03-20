@@ -1,21 +1,20 @@
 {
   flake.factory.forgejo-actions-runner = {
     name,
+    tokenFile,
+    url ? "https://git.matthewlabs.net/",
     labels ? [
       "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest"
+      "ubuntu-24.04:docker://ghcr.io/catthehacker/ubuntu:act-24.04"
       "ubuntu-22.04:docker://ghcr.io/catthehacker/ubuntu:act-22.04"
-      "ubuntu-20.04:docker://ghcr.io/catthehacker/ubuntu:act-20.04"
     ],
   }: {
-    nixos.forgejo = {pkgs, ...}: {
+    nixos.forgejo-actions-runner = {pkgs, ...}: {
       services.gitea-actions-runner = {
         package = pkgs.forgejo-runner;
         instances."${name}" = {
+          inherit tokenFile name labels url;
           enable = true;
-          name = "${name}";
-          url = "https://git.matthewlabs.net/";
-          labels = labels;
-          # token = TODO_FORGEJO_RUNNER_TOKEN;
         };
       };
 

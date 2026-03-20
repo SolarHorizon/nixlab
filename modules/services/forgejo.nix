@@ -1,19 +1,12 @@
-{
-  flake.modules.nixos.forgejo = let
-    domain = "git.matthewlabs.net";
-    httpPort = 3100;
-    sshPort = 22;
-  in {
+{self, ...}: let
+  host = "monolith";
+  domain = "git.matthewlabs.net";
+  httpPort = 3100;
+  sshPort = 22;
+in {
+  flake.modules.nixos.forgejo = {
     services.openssh.settings = {
       AcceptEnv = "GIT_PROTOCOL";
-    };
-
-    services.caddy.virtualHosts = {
-      "${domain}" = {
-        extraConfig = ''
-          reverse_proxy http://127.0.0.1:${toString httpPort}
-        '';
-      };
     };
 
     services.forgejo = {
@@ -31,6 +24,9 @@
           SSH_PORT = sshPort;
           SSH_CREATE_AUTHORIZED_KEYS_FILE = true;
         };
+        service = {
+          DISABLE_REGISTRATION = true;
+        };
         repository = {
           ENABLE_PUSH_CREATE_USER = true;
           ENABLE_PUSH_CREATE_ORG = true;
@@ -47,6 +43,9 @@
           ENABLED = true;
           DEFAULT_ACTIONS_URL = "github";
         };
+        webhook = {
+          ALLOWED_HOST_LIST = "*";
+        };
         mailer = {
           ENABLED = false;
           SMTP_ADDR = "${domain}";
@@ -55,8 +54,8 @@
         };
         security = {
           REVERSE_PROXY_TRUSTED_PROXIES = builtins.concatStringsSep "," [
-            "caddy.ts.net"
-            "gateway.ts.net"
+            "monolith.ts.net"
+            "floodgate.ts.net"
           ];
         };
         session = {
@@ -64,5 +63,16 @@
         };
       };
     };
+  };
+
+  flake.modules.nixos.caddy-external = self.lib.mkReverseProxy {
+    inherit domain host;
+    port = httpPort;
+  };
+
+  flake.modules.nixos.${host} = {
+    imports = with self.modules.nixos; [
+      forgejo
+    ];
   };
 }

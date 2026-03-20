@@ -8,7 +8,7 @@
     imports = with self.modules.nixos; [
       profile-server
       grub
-      caddy
+      caddy-external
       minecraft
       minecraft-cobbleverse
     ];
@@ -25,6 +25,4 @@
     zramSwap.enable = true;
     services.logrotate.checkConfig = false;
   };
-
-  # flake.nixosConfigurations = self.lib.mkNixos "x86_64-linux" "floodgate";
 }

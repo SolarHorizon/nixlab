@@ -1,18 +1,23 @@
-{lib, ...}: {
-  flake.modules.nixos.omada = {config, ...}: let
-    dataPath = "/var/lib/omada";
+{
+  self,
+  lib,
+  ...
+}: let
+  dataDir = "/var/lib/omada";
 
-    manageHttpsPort = 8043;
-    manageHttpPort = 8088;
-    portalHttpsPort = 8843;
-    portalHttpPort = manageHttpPort;
+  host = "monolith";
+  domain = "omada.matthewlabs.net";
+  manageHttpsPort = 8043;
+  manageHttpPort = 8088;
+  portalHttpsPort = 8843;
+  portalHttpPort = manageHttpPort;
 
-    uid = 508;
-    user = "omada";
-
-    gid = uid;
-    group = user;
-  in {
+  user = "omada";
+  uid = 508;
+  group = user;
+  gid = uid;
+in {
+  flake.modules.nixos.omada = {config, ...}: {
     users.users.${user} = {
       inherit uid group;
       isSystemUser = true;
@@ -33,8 +38,8 @@
         ROOTLESS = "true";
       };
       volumes = [
-        "${dataPath}/data:/opt/tplink/EAPController/data"
-        "${dataPath}/logs:/opt/tplink/EAPController/logs"
+        "${dataDir}/data:/opt/tplink/EAPController/data"
+        "${dataDir}/logs:/opt/tplink/EAPController/logs"
       ];
       extraOptions = [
         "--network=host"
@@ -66,9 +71,20 @@
     };
 
     systemd.tmpfiles.rules = [
-      "d ${dataPath} 0755 ${user} ${group} -"
-      "d ${dataPath}/data 0755 ${user} ${group} -"
-      "d ${dataPath}/logs 0755 ${user} ${group} -"
+      "d ${dataDir} 0755 ${user} ${group} -"
+      "d ${dataDir}/data 0755 ${user} ${group} -"
+      "d ${dataDir}/logs 0755 ${user} ${group} -"
+    ];
+  };
+
+  flake.modules.nixos.caddy-internal = self.lib.mkReverseProxy {
+    inherit domain host;
+    port = manageHttpPort;
+  };
+
+  flake.modules.nixos.${host} = {
+    imports = with self.modules.nixos; [
+      omada
     ];
   };
 }

@@ -1,9 +1,85 @@
 keys:
   - &admin_matt age14fqy65mt6fr0sakrmw05cy73amatkrqq2lhx3h57csh66txkee0qr8hugt
+
+  # - &host_theseus age175v84l44utasp9l62lfmjut8xnm6hh5u8sp7e6al0qvcvxwzyg4q9f4x8p
   - &host_framework age175v84l44utasp9l62lfmjut8xnm6hh5u8sp7e6al0qvcvxwzyg4q9f4x8p
-  - &host_theseus age175v84l44utasp9l62lfmjut8xnm6hh5u8sp7e6al0qvcvxwzyg4q9f4x8p
+
   - &host_floodgate age10km7dp5nqkt5rpck8rtm3p82hygax05n8lup47adxgftn8fj4y8sq2yd9x
+  - &host_monolith age15fdt6zlks5ajqchjf44u9za4ld2sdrh38gt3a0ejs8ra2mv9nf3st37lgy
 creation_rules:
+
+  # service-level access
+  - path_regex: secrets/services/caddy.yaml
+    key_groups:
+      - age:
+        - *host_floodgate
+        - *host_monolith
+        - *admin_matt
+  - path_regex: secrets/services/forgejo.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
+  # - path_regex: secrets/services/homepage.yaml
+  #   key_groups:
+  #     - age:
+  #       - *host_monolith
+  #       - *admin_matt
+  - path_regex: secrets/services/minecraft.yaml
+    key_groups:
+      - age:
+        - *host_floodgate
+        - *host_monolith
+        - *admin_matt
+  - path_regex: secrets/services/radarr.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
+  - path_regex: secrets/services/searxng.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
+  - path_regex: secrets/services/sonarr.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
+  - path_regex: secrets/services/speedtest-tracker.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
+  - path_regex: secrets/services/valheim-server.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
+  - path_regex: secrets/services/vintagestory.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
+
+  # host-level access
+  - path_regex: secrets/hosts/framework.yaml
+    key_groups:
+      - age:
+        - *host_framework
+        - *admin_matt
+  - path_regex: secrets/hosts/monolith.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
+  - path_regex: secrets/hosts/floodgate.yaml
+    key_groups:
+      - age:
+        - *host_floodgate
+        - *admin_matt
+
+    # full admin access
   - path_regex: secrets/users/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
@@ -12,20 +88,7 @@ creation_rules:
     key_groups:
       - age:
         - *admin_matt
-  - path_regex: secrets/hosts/framework.yaml
-    key_groups:
-      - age:
-        - *host_framework
-  - path_regex: secrets/hosts/theseus.yaml
-    key_groups:
-      - age:
-        - *host_theseus
-  - path_regex: secrets/hosts/floodgate.yaml
-    key_groups:
-      - age:
-        - *host_floodgate
-  - path_regex: secrets/services/minecraft.yaml
+  - path_regex: secrets/services/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
         - *admin_matt
-        - *host_floodgate

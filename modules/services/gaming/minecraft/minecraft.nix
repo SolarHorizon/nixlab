@@ -1,5 +1,9 @@
 {inputs, ...}: {
-  flake.modules.nixos.minecraft = {pkgs, ...}: {
+  flake.modules.nixos.minecraft = {
+    config,
+    pkgs,
+    ...
+  }: {
     imports = [
       inputs.nix-minecraft.nixosModules.minecraft-servers
     ];
@@ -17,13 +21,18 @@
 
     sops.secrets."velocity/forwardingSecret" = {
       owner = "minecraft";
-      sopsFile = ../../../secrets/services/minecraft.yaml;
+      sopsFile = ../../../../secrets/services/minecraft.yaml;
     };
+
+    sops.templates."minecraft.env".content = ''
+      forwardingSecret=${config.sops.placeholder."velocity/forwardingSecret"}
+    '';
 
     services.minecraft-servers = {
       enable = true;
       eula = true;
       openFirewall = true;
+      environmentFile = config.sops.templates."minecraft.env".path;
     };
   };
 

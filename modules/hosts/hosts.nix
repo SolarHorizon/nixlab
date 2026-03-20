@@ -37,6 +37,10 @@ in {
                 nixlab.hosts = config.hosts;
               };
 
+              nixpkgs.overlays = [
+                self.overlays.default
+              ];
+
               networking.hostName = name;
             }
           ];

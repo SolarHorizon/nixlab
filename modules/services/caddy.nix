@@ -41,10 +41,33 @@
     ];
   };
 
-  flake.modules.nixos.caddy-internal = {
+  flake.modules.nixos.caddy-internal = {config, ...}: {
     imports = with self.modules.nixos; [
-      adguardhome
       caddy-external
     ];
+
+    # services.adguardhome = {
+    #   enable = true;
+    #   openFirewall = true;
+    #   settings.dns.rewrites = map (domain: {
+    #     inherit domain;
+    #     answer = "127.0.0.1";
+    #   }) (builtins.attrNames config.services.caddy.virtualHosts);
+    # };
+
+    services.dnsmasq = {
+      enable = true;
+      settings = {
+        server = ["1.1.1.1" "1.0.0.1"];
+        address =
+          map (domain: "/${domain}/127.0.0.1")
+          (builtins.attrNames config.services.caddy.virtualHosts);
+      };
+    };
+
+    networking.firewall = {
+      allowedTCPPorts = [53];
+      allowedUDPPorts = [53];
+    };
   };
 }

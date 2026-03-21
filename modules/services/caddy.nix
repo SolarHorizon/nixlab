@@ -43,6 +43,7 @@
 
   flake.modules.nixos.caddy-internal = {
     imports = with self.modules.nixos; [
+      adguardhome
       caddy-external
     ];
   };

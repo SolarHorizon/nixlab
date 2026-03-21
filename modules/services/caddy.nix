@@ -56,6 +56,7 @@
 
     services.dnsmasq = {
       enable = true;
+      resolveLocalQueries = false;
       settings = {
         server = ["1.1.1.1" "1.0.0.1"];
         address =

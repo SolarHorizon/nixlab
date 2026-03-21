@@ -13,8 +13,10 @@
       };
 
       globalConfig = ''
-            acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
-        resolvers 1.1.1.1 1.0.0.1
+        cert_issuer acme {
+        	dns cloudflare {$CLOUDFLARE_API_TOKEN}
+        	resolvers 1.1.1.1 1.0.0.1
+        }
       '';
     };
 
@@ -29,17 +31,19 @@
     systemd.services.caddy.serviceConfig.EnvironmentFile = [
       config.sops.templates."caddy.env".path
     ];
-  };
 
-  flake.modules.nixos.caddy-internal = {
-    imports = with self.modules.nixos; [
-      caddy-base
-    ];
+    networking.firewall.allowedTCPPorts = [80 443];
   };
 
   flake.modules.nixos.caddy-external = {
     imports = with self.modules.nixos; [
       caddy-base
+    ];
+  };
+
+  flake.modules.nixos.caddy-internal = {
+    imports = with self.modules.nixos; [
+      caddy-external
     ];
   };
 }

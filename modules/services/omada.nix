@@ -44,7 +44,7 @@ in {
       extraOptions = [
         "--network=host"
         "--stop-timeout=60"
-        "--ulimit nofile=4096:8192"
+        "--ulimit=nofile=4096:8192"
         "--user=${toString uid}:${toString gid}"
       ];
     };

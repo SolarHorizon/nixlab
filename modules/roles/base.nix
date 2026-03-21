@@ -40,6 +40,7 @@
     ...
   }: {
     imports = with self.modules.homeManager; [
+      sops
       ssh
       zsh
     ];

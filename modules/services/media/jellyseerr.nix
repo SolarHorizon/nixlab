@@ -11,7 +11,7 @@ in {
     };
   };
 
-  flake.modules.nixos.caddy-internal = self.lib.mkReverseProxy {
+  flake.modules.nixos.caddy-external = self.lib.mkReverseProxy {
     inherit domain host port;
   };
 

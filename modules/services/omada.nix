@@ -77,9 +77,17 @@ in {
     ];
   };
 
-  flake.modules.nixos.caddy-internal = self.lib.mkReverseProxy {
-    inherit domain host;
-    port = manageHttpPort;
+  flake.modules.nixos.caddy-internal = {
+    services.caddy.virtualHosts.${domain}.extraConfig = ''
+      reverse_proxy ${host}:${toString manageHttpPort} {
+      	header_down X-Real-IP {http.request.remote}
+      	header_down X-Forwarded-For {http.request.remote}
+      	transport http {
+      		tls
+      		tls_insecure_skip_verify
+      	}
+      }
+    '';
   };
 
   flake.modules.nixos.${host} = {

@@ -10,9 +10,12 @@ in {
       sopsFile = ../../../secrets/services/valheim-server.yaml;
     };
 
-    sops.templates."valheim-server.env".content = ''
-      SERVER_PASS=${config.sops.placeholder."valheim/server_password"}
-    '';
+    sops.templates."valheim-server.env" = {
+      owner = user;
+      content = ''
+        SERVER_PASS=${config.sops.placeholder."valheim/server_password"}
+      '';
+    };
 
     users.groups."${group}".gid = gid;
     users.users."${user}" = {

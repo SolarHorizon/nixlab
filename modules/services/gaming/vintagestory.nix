@@ -10,9 +10,12 @@ in {
       sopsFile = ../../../secrets/services/vintagestory.yaml;
     };
 
-    sops.templates."vintagestory.env".content = ''
-      VS_CFG_SERVER_PASSWORD=${config.sops.placeholder."vintagestory/server_password"}
-    '';
+    sops.templates."vintagestory.env" = {
+      owner = user;
+      content = ''
+        VS_CFG_SERVER_PASSWORD=${config.sops.placeholder."vintagestory/server_password"}
+      '';
+    };
 
     users.groups."${group}".gid = gid;
     users.users."${user}" = {

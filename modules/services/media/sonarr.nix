@@ -19,6 +19,8 @@ in {
   flake.modules.nixos.recyclarr = {config, ...}: {
     sops.secrets."sonarr/api_key" = {
       sopsFile = ../../../secrets/services/sonarr.yaml;
+      group = config.media-server.group;
+      mode = "0440";
     };
 
     services.recyclarr.configuration.sonarr.sonarr_main = {

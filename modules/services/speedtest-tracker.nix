@@ -12,9 +12,12 @@ in {
       sopsFile = ../../secrets/services/speedtest-tracker.yaml;
     };
 
-    sops.templates."speedtest-tracker.env".content = ''
-      APP_KEY=${config.sops.placeholder."speedtest-tracker/app_key"}
-    '';
+    sops.templates."speedtest-tracker.env" = {
+      owner = user;
+      content = ''
+        APP_KEY=${config.sops.placeholder."speedtest-tracker/app_key"}
+      '';
+    };
 
     users.groups."${group}".gid = gid;
     users.users."${user}" = {

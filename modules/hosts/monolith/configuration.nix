@@ -30,9 +30,9 @@ in {
             prefixLength = 24;
           }
         ];
-        useDHCP = false;
       };
       defaultGateway = "10.0.10.1";
+      useDHCP = false;
     };
 
     system.stateVersion = "24.05";

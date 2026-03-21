@@ -13,7 +13,8 @@
       };
 
       globalConfig = ''
-        acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
+            acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
+        resolvers 1.1.1.1 1.0.0.1
       '';
     };
 

@@ -79,7 +79,7 @@ in {
 
   flake.modules.nixos.caddy-internal = {
     services.caddy.virtualHosts.${domain}.extraConfig = ''
-      reverse_proxy ${host}:${toString manageHttpPort} {
+      reverse_proxy ${host}:${toString manageHttpsPort} {
       	header_down X-Real-IP {http.request.remote}
       	header_down X-Forwarded-For {http.request.remote}
       	transport http {

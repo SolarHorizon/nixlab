@@ -1,7 +1,7 @@
 keys:
   - &admin_matt age14fqy65mt6fr0sakrmw05cy73amatkrqq2lhx3h57csh66txkee0qr8hugt
 
-  # - &host_theseus age175v84l44utasp9l62lfmjut8xnm6hh5u8sp7e6al0qvcvxwzyg4q9f4x8p
+  - &host_theseus age15caay8y9fvgx7pnfnxck56rjmm6rqfarp7dzdvwp04y9fea70fvqgc58qf
   - &host_framework age175v84l44utasp9l62lfmjut8xnm6hh5u8sp7e6al0qvcvxwzyg4q9f4x8p
 
   - &host_floodgate age10km7dp5nqkt5rpck8rtm3p82hygax05n8lup47adxgftn8fj4y8sq2yd9x

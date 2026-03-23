@@ -1,9 +1,14 @@
-{self, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   hosts.nixos.nomad = {
   };
 
   flake.modules.nixos.nomad = {
     imports = with self.modules.nixos; [
+      inputs.nixos-wsl.nixosModules.default
       role-base
       nix-ld
     ];
@@ -17,5 +22,6 @@
     services.fwupd.enable = false;
 
     system.stateVersion = "25.11";
+    nixpkgs.hostPlatform = "x86_64-linux";
   };
 }

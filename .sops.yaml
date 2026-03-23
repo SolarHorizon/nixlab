@@ -63,6 +63,11 @@ creation_rules:
         - *admin_matt
 
   # host-level access
+  - path_regex: secrets/hosts/theseus.yaml
+    key_groups:
+      - age:
+        - *host_theseus
+        - *admin_matt
   - path_regex: secrets/hosts/framework.yaml
     key_groups:
       - age:

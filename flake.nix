@@ -17,6 +17,16 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     _1password-shell-plugins = {
       url = "github:/1password/shell-plugins";
       inputs.nixpkgs.follows = "nixpkgs";

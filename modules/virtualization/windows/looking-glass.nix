@@ -40,7 +40,9 @@
       enable = true;
 
       settings = {
-        rawMouse = "yes";
+        input = {
+          rawMouse = "yes";
+        };
         spice = {
           enable = true;
           audio = true;

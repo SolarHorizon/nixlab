@@ -61,12 +61,12 @@
 
     environment.systemPackages = [
       pkgs.local.beacn-utility-unstable
-      pkgs.local.pipeweaver
+      pkgs.local.pipeweaver-daemon
       pkgs.local.pipeweaver-app
     ];
 
     systemd.user.services.pipeweaver = let
-      package = pkgs.local.pipeweaver;
+      package = pkgs.local.pipeweaver-daemon;
     in {
       enable = true;
       reloadIfChanged = true;

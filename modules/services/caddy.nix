@@ -54,22 +54,31 @@
       caddy-external
     ];
 
-    services.dnsmasq = {
-      enable = true;
-      resolveLocalQueries = false;
-      settings = {
-        server = ["1.1.1.1" "1.0.0.1"];
-        address =
-          lib.throwIf (hostConfig.staticIpAddr == null)
-          "`hosts.nixos.${hostConfig.name}.staticIpAddr` must be set when running an internal Caddy server"
-          map (domain: "/${domain}/${hostConfig.staticIpAddr}")
-          (builtins.attrNames config.services.caddy.virtualHosts);
-      };
-    };
+    config = lib.mkMerge [
+      (self.lib.mkReverseProxy {
+        domain = "switch.matthewlabs.net";
+        host = "192.168.0.100";
+        port = 80;
+      })
+      {
+        services.dnsmasq = {
+          enable = true;
+          resolveLocalQueries = false;
+          settings = {
+            server = ["1.1.1.1" "1.0.0.1"];
+            address =
+              lib.throwIf (hostConfig.staticIpAddr == null)
+              "`hosts.nixos.${hostConfig.name}.staticIpAddr` must be set when running an internal Caddy server"
+              map (domain: "/${domain}/${hostConfig.staticIpAddr}")
+              (builtins.attrNames config.services.caddy.virtualHosts);
+          };
+        };
 
-    networking.firewall = {
-      allowedTCPPorts = [53];
-      allowedUDPPorts = [53];
-    };
+        networking.firewall = {
+          allowedTCPPorts = [53];
+          allowedUDPPorts = [53];
+        };
+      }
+    ];
   };
 }

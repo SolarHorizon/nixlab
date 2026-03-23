@@ -23,6 +23,7 @@
     ### need to find a home for everything below
 
     environment.systemPackages = with pkgs; [
+      chromium
       alsa-utils # using this to mute/unmute beacn mic with a kde hotkey
       gparted # useful sometimes
       keymapp # for moonlander config

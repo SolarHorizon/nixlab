@@ -17,6 +17,7 @@
 
     sops = {
       age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519_sops"];
+      age.generateKey = true;
       defaultSopsFile = ../../secrets/users/${config.home.username}.yaml;
     };
   };

@@ -1,5 +1,9 @@
 {self, ...}: {
-  flake.modules.nixos.theseus = {config, ...}: {
+  flake.modules.nixos.theseus = {
+    config,
+    pkgs,
+    ...
+  }: {
     imports = with self.modules.nixos; [
       matt-private
     ];
@@ -17,10 +21,16 @@
       imports = with self.modules.homeManager; [
         minecraft
         libreoffice
+      ];
+
+      home.packages = with pkgs; [
         protontricks
         alsa-scarlett-gui
         unstable.r2modman
-        retroarch-full
+        (retroarch.withCores (cores:
+          with cores; [
+            pcsx2
+          ]))
       ];
 
       home.stateVersion = "25.11";

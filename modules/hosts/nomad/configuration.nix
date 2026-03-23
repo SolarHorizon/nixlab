@@ -2,7 +2,7 @@
   hosts.nixos.nomad = {
   };
 
-  flake.modules.nixos.floodgate = {
+  flake.modules.nixos.nomad = {
     imports = with self.modules.nixos; [
       role-base
       nix-ld

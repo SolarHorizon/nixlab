@@ -8,13 +8,6 @@
       (writeShellScriptBin "restart" ''
         qdbus org.kde.Shutdown /Shutdown logoutAndReboot
       '')
-      # only relevant for desktop
-      # (
-      #   writeShellScriptBin "win-reboot" ''
-      #     sudo efibootmgr --bootnext 0000 \
-      #       && qdbus org.kde.Shutdown /Shutdown logoutAndReboot
-      #   ''
-      # )
     ];
 
     services.displayManager.sddm.enable = true;

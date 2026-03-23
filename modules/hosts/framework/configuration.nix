@@ -22,6 +22,4 @@
 
     system.stateVersion = "25.05";
   };
-
-  #flake.nixosConfigurations = self.lib.mkNixos "x86_64-linux" "framework";
 }

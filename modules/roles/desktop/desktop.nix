@@ -57,9 +57,8 @@
       mpv
       jellyfin-mpv-shim
       piper
-      moonlight-qt
+      moonlight-qt # gaming module
       # alsa-scarlett-gui # desktop-only audio
-      # looking-glass-client # looking-glass module
       # protontricks # gaming module
       # retroarch-full # gaming/emulation module
       # unstable.r2modman # gaming module

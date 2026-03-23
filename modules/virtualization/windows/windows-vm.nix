@@ -1,5 +1,5 @@
 {self, ...}: {
-  self.modules.nixos.windows-vm = {pkgs, ...}: {
+  flake.modules.nixos.windows-vm = {pkgs, ...}: {
     imports = with self.modules.nixos; [
       looking-glass
     ];

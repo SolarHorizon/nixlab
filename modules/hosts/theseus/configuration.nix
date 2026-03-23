@@ -11,6 +11,7 @@
       windows-vm
       beacn
       nix-ld
+      sunshine
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [

@@ -1,5 +1,5 @@
 {
-  self.modules.nixos.theseus = {
+  flake.modules.nixos.theseus = {
     config,
     lib,
     modulesPath,

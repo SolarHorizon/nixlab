@@ -1,5 +1,5 @@
 {
-  self.modules.nixos.beacn = {
+  flake.modules.nixos.beacn = {
     config,
     pkgs,
     lib,

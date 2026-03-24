@@ -61,6 +61,11 @@ creation_rules:
       - age:
         - *host_monolith
         - *admin_matt
+  - path_regex: secrets/services/wordpress.yaml
+    key_groups:
+      - age:
+        - *host_floodgate
+        - *admin_matt
 
   # host-level access
   - path_regex: secrets/hosts/theseus.yaml

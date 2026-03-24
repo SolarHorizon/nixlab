@@ -1,5 +1,13 @@
-{lib, ...}: {
+{
+  lib,
+  inputs,
+  ...
+}: {
   flake.modules.nixos.zsh = {pkgs, ...}: {
+    imports = [
+      inputs.direnv-instant.nixosModules.direnv-instant
+    ];
+
     environment.shells = [
       pkgs.zsh
     ];
@@ -29,8 +37,13 @@
       ];
     };
 
-    programs.direnv.enable = true;
-    programs.direnv.enableZshIntegration = true;
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
+    programs.direnv-instant.enable = true;
   };
 
   flake.modules.homeManager.zsh = {

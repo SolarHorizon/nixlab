@@ -11,6 +11,7 @@
     nixvim.url = "github:nix-community/nixvim/main";
     claude-code-nix.url = "github:sadjow/claude-code-nix";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    direnv-instant.url = "github:Mic92/direnv-instant";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

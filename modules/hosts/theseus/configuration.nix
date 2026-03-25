@@ -8,10 +8,12 @@
     imports = with self.modules.nixos; [
       role-kde
       lanzaboote
-      windows-vm
       beacn
-      nix-ld
+      roblox-dev
+
+      # remote access
       sunshine
+      ssh
     ];
 
     home-manager.sharedModules = with self.modules.homeManager; [

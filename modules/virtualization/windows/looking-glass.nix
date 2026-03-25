@@ -20,7 +20,7 @@
 
     virtualisation.libvirtd.qemu.verbatimConfig = ''
       cgroup_device_acl = [
-      	"/dev/kvmfr0"
+      	"/dev/kvmfr0",
       	"/dev/vfio/vfio",
       	"/dev/vfio/23",
       	"/dev/vfio/24",

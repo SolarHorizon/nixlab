@@ -13,7 +13,7 @@
       "iommu=pt"
       # "vfio-pci.ids=8086:56a5,8086:4f92" # A380
       "vfio-pci.ids=8086:e20b,8086:e2f7" # B580
-      "pci=noats"     # prevent AMD IOMMU IOTLB timeouts with Intel Arc GPUs
+      "pci=noats" # prevent AMD IOMMU IOTLB timeouts with Intel Arc GPUs
       "pcie_aspm=off" # prevent PCIe link power states from hanging the B580
     ];
 

@@ -18,25 +18,6 @@
 
     virtualisation.libvirtd = {
       enable = true;
-      hooks.qemu.b580-passthrough-fix = pkgs.writeShellScript "b580-passthrough-fix" ''
-        GUEST_NAME="$1"
-        ACTION="$2"
-
-        if [ "$GUEST_NAME" = "win-11" ] && [ "$ACTION" = "prepare" ]; then
-          PCI_ADDR="0000:07:00.0"
-          echo "$PCI_ADDR" > /sys/bus/pci/devices/$PCI_ADDR/driver/unbind 2>/dev/null || true
-
-          # shrink ReBAR to 256MB to avoid IOMMU DMA mapping failures
-          # https://github.com/intel/compute-runtime/issues/880
-          echo 8 > /sys/bus/pci/devices/$PCI_ADDR/resource2_resize
-
-          # disable broken FLR/bus reset that wedges the IOMMU on failure
-          echo > /sys/bus/pci/devices/$PCI_ADDR/reset_method
-
-          echo "xe-vfio-pci" > /sys/bus/pci/devices/$PCI_ADDR/driver_override
-          echo "$PCI_ADDR" > /sys/bus/pci/drivers/xe-vfio-pci/bind
-        fi
-      '';
       qemu = {
         package = pkgs.qemu_kvm;
         runAsRoot = true;

@@ -6,6 +6,7 @@
   imports = [
     inputs.flake-parts.flakeModules.modules
     inputs.pkgs-by-name-for-flake-parts.flakeModule
+    inputs.treefmt-nix.flakeModule
   ];
 
   systems = [
@@ -13,7 +14,18 @@
   ];
 
   perSystem = {pkgs, ...}: {
-    formatter = pkgs.alejandra;
+    treefmt = {
+      projectRootFile = "flake.nix";
+      settings.excludes = [
+        "secrets/*"
+        ".sops.yaml"
+      ];
+      programs = {
+        alejandra.enable = true;
+        prettier.enable = true;
+        shfmt.enable = true;
+      };
+    };
     pkgsDirectory = ../../packages;
   };
 

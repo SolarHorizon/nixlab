@@ -12,6 +12,7 @@
     claude-code-nix.url = "github:sadjow/claude-code-nix";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     direnv-instant.url = "github:Mic92/direnv-instant";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

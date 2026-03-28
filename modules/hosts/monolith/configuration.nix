@@ -14,6 +14,7 @@ in {
       media-server
       caddy-internal
       minecraft
+      minecraft-rhode-island
       vintagestory
       valheim-server
     ];

@@ -9,6 +9,7 @@
       role-kde
       lanzaboote
       beacn
+      thunderbolt
       roblox-dev
 
       # remote access

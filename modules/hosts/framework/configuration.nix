@@ -8,6 +8,7 @@
     imports = with self.modules.nixos; [
       role-kde
       limine
+      thunderbolt
       yubikey-auto-lock
     ];
 

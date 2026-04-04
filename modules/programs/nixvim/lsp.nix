@@ -10,6 +10,8 @@
     plugins.lsp.enable = true;
     plugins.lsp.servers.nixd.enable = true;
 
+    plugins.luau-lsp.enable = true;
+
     plugins.lint = {
       enable = true;
       autoCmd.event = [

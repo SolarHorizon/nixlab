@@ -65,4 +65,12 @@
     networking.firewall.trustedInterfaces = ["virbr0"];
     networking.extraHosts = "192.168.122.98 shadow";
   };
+
+  flake.modules.homeManager.windows-vm = {lib, ...}: {
+    programs.ssh.matchBlocks."shadow" = lib.hm.dag.entryBefore ["*"] {
+      identityFile = [
+        "~/.ssh/id_ed25519"
+      ];
+    };
+  };
 }

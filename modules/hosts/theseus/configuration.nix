@@ -85,5 +85,7 @@
         "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
       ];
     };
+
+    networking.firewall.allowedTCPPorts = [24800]; # deskflow
   };
 }

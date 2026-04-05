@@ -23,6 +23,10 @@
   };
 
   flake.modules.homeManager.roblox-dev = {pkgs, ...}: {
+    imports = with self.modules.homeManager; [
+      windows-vm
+    ];
+
     home.sessionPath = [
       "$HOME/.rokit/bin"
     ];

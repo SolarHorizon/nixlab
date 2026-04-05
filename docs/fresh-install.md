@@ -31,7 +31,17 @@ sops updatekeys secrets/hosts/<hostname>.yaml
 
 Copy `id_ed25519_sops` to `~/.ssh/id_ed25519_sops` on the new machine. Needed for initial secret decryption during rebuild.
 
-### 5. Rebuild
+### 5. Derive the age key for the sops CLI
+
+Convert the sops SSH key to an age key so `sops` can decrypt/edit secrets:
+
+```sh
+mkdir -p ~/.config/sops/age
+ssh-to-age -private-key -i ~/.ssh/id_ed25519_sops > ~/.config/sops/age/keys.txt
+chmod 600 ~/.config/sops/age/keys.txt
+```
+
+### 6. Rebuild
 
 ```sh
 sudo nixos-rebuild switch --flake .#<hostname>

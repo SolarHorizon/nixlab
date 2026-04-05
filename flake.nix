@@ -13,6 +13,7 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     direnv-instant.url = "github:Mic92/direnv-instant";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    lan-mouse.url = "github:feschber/lan-mouse";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

@@ -21,6 +21,7 @@
       imports = with self.modules.homeManager; [
         minecraft
         libreoffice
+        lan-mouse
       ];
 
       home.packages = with pkgs; [
@@ -35,5 +36,7 @@
 
       home.stateVersion = "25.11";
     };
+
+    networking.firewall.allowedTCPPorts = [4242];
   };
 }

@@ -9,6 +9,13 @@
       roblox-dev
     ];
 
+    nix.registry.nixblox = {
+      to = {
+        type = "git";
+        url = "https://git.matt.you/matt/nixblox";
+      };
+    };
+
     boot.kernel.sysctl."net.ipv4.conf.virbr0.route_localnet" = 1;
 
     networking.nftables.tables.jest-nat = {

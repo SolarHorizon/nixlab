@@ -15,6 +15,11 @@ creation_rules:
         - *host_floodgate
         - *host_monolith
         - *admin_matt
+  - path_regex: secrets/services/attic.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
   - path_regex: secrets/services/forgejo.yaml
     key_groups:
       - age:

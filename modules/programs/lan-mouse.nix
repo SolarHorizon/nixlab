@@ -6,5 +6,8 @@
       enable = true;
       systemd = true;
     };
+
+    # why did they not do this themselves?
+    systemd.user.services.lan-mouse.Install.WantedBy = ["graphical-session.target"];
   };
 }

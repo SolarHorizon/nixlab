@@ -1,6 +1,6 @@
 {self, ...}: let
   host = "monolith";
-  domain = "speedtest.matthewlabs.net";
+  domain = "speedtest.matt.you";
   port = 28082;
   user = "speedtest-tracker";
   uid = 137;

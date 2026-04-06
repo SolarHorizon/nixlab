@@ -1,7 +1,7 @@
 {self, ...}: let
   host = "monolith";
   port = 9696;
-  domain = "prowlarr.matthewlabs.net";
+  domain = "prowlarr.matt.you";
 in {
   flake.modules.nixos.prowlarr = {pkgs, ...}: {
     services.prowlarr = {

@@ -1,6 +1,6 @@
 {self, ...}: let
   host = "monolith";
-  domain = "git.matthewlabs.net";
+  domain = "git.matt.you";
   httpPort = 3100;
   sshPort = 22;
 in {

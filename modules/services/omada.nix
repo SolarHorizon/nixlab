@@ -6,7 +6,7 @@
   dataDir = "/var/lib/omada";
 
   host = "monolith";
-  domain = "omada.matthewlabs.net";
+  domain = "omada.matt.you";
   manageHttpsPort = 8043;
   manageHttpPort = 8088;
   portalHttpsPort = 8843;

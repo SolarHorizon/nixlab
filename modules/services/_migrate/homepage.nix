@@ -68,14 +68,14 @@ in {
       };
     };
 
-    allowedHosts = "dashboard.matthewlabs.net";
+    allowedHosts = "dashboard.matt.you";
 
     services = [
       {
         "network" = [
           {
             "Speedtest Tracker" = let
-              url = "https://speedtest.matthewlabs.net";
+              url = "https://speedtest.matt.you";
             in {
               href = url;
               icon = "sh-speedtest";
@@ -89,7 +89,7 @@ in {
           }
           {
             "Omada Controller" = let
-              url = "https://omada.matthewlabs.net";
+              url = "https://omada.matt.you";
             in {
               href = url;
               icon = "sh-omada";
@@ -109,7 +109,7 @@ in {
         "legacy services" = [
           {
             "Home Assistant" = let
-              url = "https://home.matthewlabs.net";
+              url = "https://home.matt.you";
             in {
               href = url;
               icon = "sh-home-assistant";
@@ -136,7 +136,7 @@ in {
         media = [
           {
             Jellyfin = let
-              url = "https://watch.matthewlabs.net";
+              url = "https://watch.matt.you";
             in {
               href = url;
               icon = "sh-jellyfin";
@@ -151,7 +151,7 @@ in {
           }
           {
             Jellyseerr = let
-              url = "https://request.matthewlabs.net";
+              url = "https://request.matt.you";
             in {
               href = url;
               icon = "sh-jellyseerr";
@@ -164,7 +164,7 @@ in {
           }
           {
             Radarr = let
-              url = "https://radarr.matthewlabs.net";
+              url = "https://radarr.matt.you";
             in {
               href = url;
               icon = "sh-radarr";
@@ -177,7 +177,7 @@ in {
           }
           {
             Sonarr = let
-              url = "https://sonarr.matthewlabs.net";
+              url = "https://sonarr.matt.you";
             in {
               href = url;
               icon = "sh-sonarr";
@@ -286,7 +286,7 @@ in {
     port = toString config.services.homepage-dashboard.listenPort;
     url = "http://127.0.0.1:${port}";
   in {
-    "dashboard.matthewlabs.net" = {
+    "dashboard.matt.you" = {
       extraConfig = ''
         reverse_proxy ${url}
       '';

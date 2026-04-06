@@ -36,6 +36,11 @@
       config.sops.templates."caddy.env".path
     ];
 
+    # migrate from old domain
+    services.caddy.virtualHosts."*.matthewlabs.net".extraConfig = ''
+      redir https://{labels.2}.matt.you{uri} permanent
+    '';
+
     networking.firewall.allowedTCPPorts = [80 443];
   };
 
@@ -56,7 +61,7 @@
 
     config = lib.mkMerge [
       (self.lib.mkReverseProxy {
-        domain = "switch.matthewlabs.net";
+        domain = "switch.matt.you";
         host = "192.168.0.100";
         port = 80;
       })

@@ -1,5 +1,5 @@
 {self, ...}: let
-  domain = "bazarr.matthewlabs.net";
+  domain = "bazarr.matt.you";
   host = "monolith";
   port = 6767;
 in {

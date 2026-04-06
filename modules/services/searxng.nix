@@ -1,6 +1,6 @@
 {self, ...}: let
   host = "monolith";
-  domain = "search.matthewlabs.net";
+  domain = "search.matt.you";
   port = 8888;
 in {
   flake.modules.nixos.searxng = {config, ...}: {

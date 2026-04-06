@@ -1,6 +1,6 @@
 {self, ...}: let
   host = "monolith";
-  domain = "sonarr.matthewlabs.net";
+  domain = "sonarr.matt.you";
   port = 8989;
 in {
   flake.modules.nixos.sonarr = {

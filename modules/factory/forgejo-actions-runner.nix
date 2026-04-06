@@ -2,7 +2,7 @@
   flake.factory.forgejo-actions-runner = {
     name,
     tokenFile,
-    url ? "https://git.matthewlabs.net/",
+    url ? "https://git.matt.you/",
     labels ? [
       "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest"
       "ubuntu-24.04:docker://ghcr.io/catthehacker/ubuntu:act-24.04"

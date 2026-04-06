@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  domain = "watch.matthewlabs.net";
+  domain = "watch.matt.you";
   host = "monolith";
   port = 8096;
 in {

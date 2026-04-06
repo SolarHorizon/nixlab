@@ -1,5 +1,5 @@
 {self, ...}: let
-  domain = "anchorr.matthewlabs.net";
+  domain = "anchorr.matt.you";
   host = "monolith";
   port = 8282;
   portStr = toString port;

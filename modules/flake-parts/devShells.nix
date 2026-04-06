@@ -14,6 +14,7 @@
         ssh-to-age
         ssh-to-pgp
         deploy-rs
+        nix-update
       ];
     };
   };

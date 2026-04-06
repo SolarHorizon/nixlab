@@ -60,13 +60,12 @@
     environment.sessionVariables.ALSA_CONFIG_UCM2 = "${ucmConf}/share/alsa/ucm2";
 
     environment.systemPackages = [
-      pkgs.local.beacn-utility-unstable
-      pkgs.local.pipeweaver-daemon
-      pkgs.local.pipeweaver-app
+      pkgs.local.beacn-utility
+      pkgs.local.pipeweaver
     ];
 
     systemd.user.services.pipeweaver = let
-      package = pkgs.local.pipeweaver-daemon;
+      package = pkgs.local.pipeweaver;
     in {
       enable = true;
       reloadIfChanged = true;

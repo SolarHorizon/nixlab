@@ -1,4 +1,8 @@
-{self, ...}: let
+{
+  self,
+  lib,
+  ...
+}: let
   forgejoUrl = "https://git.matt.you/";
   imageName = "ghcr.io/joschi/forgejo-nix";
   imageTag = "latest";
@@ -25,21 +29,14 @@ in {
       extra-substituters = https://cache.matt.you/nixlab
       extra-trusted-public-keys = nixlab:vilT3iOpIuRLcVUs2EGxl4njjVNlM5oaundgBhOXj60=
     '';
-  in {
-    sops.secrets."runner-tokens/monolith-1" = {
-      sopsFile = ../../../secrets/services/forgejo.yaml;
-    };
 
-    sops.templates."forgejo-runner-monolith-1.env".content = ''
-      TOKEN=${config.sops.placeholder."runner-tokens/monolith-1"}
-    '';
+    runners = ["monolith-1" "monolith-2" "monolith-3"];
 
-    services.gitea-actions-runner = {
-      package = pkgs.forgejo-runner;
-      instances."monolith-1" = {
+    mkRunner = name: {
+      services.gitea-actions-runner.instances.${name} = {
         enable = true;
-        name = "monolith-1";
-        tokenFile = config.sops.templates."forgejo-runner-monolith-1.env".path;
+        inherit name;
+        tokenFile = config.sops.templates."forgejo-runner.env".path;
         url = forgejoUrl;
         labels = [
           "nix:docker://${imageName}:${imageTag}"
@@ -53,14 +50,30 @@ in {
         };
       };
     };
+  in
+    lib.mkMerge (
+      (map mkRunner runners)
+      ++ [
+        {
+          sops.secrets."forgejo/runner-token" = {
+            sopsFile = ../../../secrets/services/forgejo.yaml;
+          };
 
-    virtualisation.podman = {
-      enable = true;
-      dockerSocket.enable = true;
-    };
+          sops.templates."forgejo-runner.env".content = ''
+            TOKEN=${config.sops.placeholder."forgejo/runner-token"}
+          '';
 
-    networking.firewall.trustedInterfaces = ["br-+"];
-  };
+          services.gitea-actions-runner.package = pkgs.forgejo-runner;
+
+          virtualisation.podman = {
+            enable = true;
+            dockerSocket.enable = true;
+          };
+
+          networking.firewall.trustedInterfaces = ["br-+"];
+        }
+      ]
+    );
 
   flake.modules.nixos.monolith = {
     imports = with self.modules.nixos; [

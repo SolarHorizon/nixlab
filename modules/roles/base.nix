@@ -16,11 +16,19 @@
 
     nixpkgs.config.allowUnfree = true;
 
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-      "pipe-operators"
-    ];
+    nix.settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "pipe-operators"
+      ];
+      substituters = [
+        "https://cache.matt.you/nixlab"
+      ];
+      trusted-public-keys = [
+        "nixlab:vilT3iOpIuRLcVUs2EGxl4njjVNlM5oaundgBhOXj60="
+      ];
+    };
 
     services.fwupd.enable = lib.mkDefault true;
 

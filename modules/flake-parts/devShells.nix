@@ -13,8 +13,10 @@
         sops
         ssh-to-age
         ssh-to-pgp
+        podman
         deploy-rs
         nix-update
+        attic-client
       ];
     };
   };

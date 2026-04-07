@@ -70,6 +70,9 @@
           enable = true;
           resolveLocalQueries = false;
           settings = {
+            bind-dynamic = true;
+            # TODO: make this dynamic
+            listen-address = "100.121.126.46";
             server = ["1.1.1.1" "1.0.0.1"];
             address =
               lib.throwIf (hostConfig.staticIpAddr == null)

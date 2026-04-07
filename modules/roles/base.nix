@@ -28,6 +28,7 @@
       trusted-public-keys = [
         "nixlab:vilT3iOpIuRLcVUs2EGxl4njjVNlM5oaundgBhOXj60="
       ];
+      trusted-users = ["@wheel"];
     };
 
     services.fwupd.enable = lib.mkDefault true;

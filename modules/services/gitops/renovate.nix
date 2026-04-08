@@ -21,7 +21,7 @@
       settings = {
         platform = "forgejo";
         endpoint = "https://git.matt.you/api/v1";
-        gitAuthor = "Renovate Bot <renovate@git.matt.you>";
+        gitAuthor = "renovate<renovate@noreply>";
         autodiscover = true;
         autodiscoverTopics = ["renovate"];
       };

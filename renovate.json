@@ -18,8 +18,10 @@
       "customType": "regex",
       "managerFilePatterns": ["/\\.nix$/"],
       "matchStrings": [
-        "oci-containers\\.containers\\.[\\s\\S]*?image\\s*=\\s*\"(?<depName>[^:]+):(?<currentValue>[^@\"]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\""
+        "oci-containers\\.containers\\.[\\s\\S]*?image\\s*=\\s*\"[^\"]+\"",
+        "image\\s*=\\s*\"(?<depName>[^:]+):(?<currentValue>[^@\"]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\""
       ],
+      "matchStringsStrategy": "recursive",
       "datasourceTemplate": "docker",
       "autoReplaceStringTemplate": "image = \"{{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}\""
     }

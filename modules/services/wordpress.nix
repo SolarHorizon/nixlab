@@ -25,7 +25,7 @@ in {
 
     # Containers
     virtualisation.oci-containers.containers."wordpress-db" = {
-      image = "mariadb:11@sha256:345fa26d595e8c7fe298e0c4098ed400356f502458769c8902229b3437d6da2b";
+      image = "mariadb:11@sha256:f5644a292224cdf4b6514aca38b3b4436f0b0443d54170a472cd14261f31402d";
       environment = {
         MARIADB_DATABASE = "wordpress";
         MARIADB_USER = "wordpress";

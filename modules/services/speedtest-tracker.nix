@@ -28,7 +28,7 @@ in {
 
     virtualisation.oci-containers.containers.speedtest-tracker = {
       # update to latest later
-      image = "lscr.io/linuxserver/speedtest-tracker:1.13.12";
+      image = "lscr.io/linuxserver/speedtest-tracker:1.13.12@sha256:2af8df42ae2e32d162ce9230002e726789700e38e527e9c74a746aa983b86888";
       serviceName = "speedtest-tracker";
       environment = {
         APP_URL = "https://${domain}";

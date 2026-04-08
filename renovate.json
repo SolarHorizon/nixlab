@@ -12,14 +12,16 @@
   "nix": {
     "enabled": true
   },
+  "pinDigests": true,
   "customManagers": [
     {
       "customType": "regex",
       "managerFilePatterns": ["/\\.nix$/"],
       "matchStrings": [
-        "oci-containers\\.containers\\.[\\s\\S]*?image\\s*=\\s*\"(?<depName>[^:]+):(?<currentValue>[^\"]+)\""
+        "oci-containers\\.containers\\.[\\s\\S]*?image\\s*=\\s*\"(?<depName>[^:]+):(?<currentValue>[^@\"]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\""
       ],
-      "datasourceTemplate": "docker"
+      "datasourceTemplate": "docker",
+      "autoReplaceStringTemplate": "image = \"{{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}\""
     }
   ]
 }

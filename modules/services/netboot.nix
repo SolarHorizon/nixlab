@@ -47,7 +47,7 @@ in {
     ];
 
     virtualisation.oci-containers.containers.netboot = {
-      image = "ghcr.io/netbootxyz/netbootxyz:latest";
+      image = "ghcr.io/netbootxyz/netbootxyz:latest@sha256:bfe21f85fcb9cc7e76b77fafcfb23c3c3ee6d06b27ef066d61ec1de04c2cca78";
       environment = {
         PGID = toString gid;
         PUID = toString uid;

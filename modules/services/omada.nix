@@ -28,7 +28,7 @@ in {
     };
 
     virtualisation.oci-containers.containers.omada-controller = {
-      image = "mbentley/omada-controller:6.1";
+      image = "mbentley/omada-controller:6.1@sha256:a5a3e41a21e74715e710b12c9adc0e612364d0ef97a761676af960ec2661a562";
       environment = {
         TZ = config.time.timeZone;
         PORTAL_HTTPS_PORT = toString portalHttpsPort;

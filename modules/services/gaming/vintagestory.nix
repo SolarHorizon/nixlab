@@ -26,7 +26,7 @@ in {
 
     virtualisation.oci-containers.containers.vintagestory = {
       serviceName = "vintagestory";
-      image = "ghcr.io/darkmatterproductions/vintagestory:latest";
+      image = "ghcr.io/darkmatterproductions/vintagestory:latest@sha256:ce84922a8e21d71b85cd4941530ba6e15409ecbd007f57d821ffc6f2b01a39dd";
       environment = {
         ENABLE_DEBUG_LOGGING = "true";
         ENABLE_CHAT_LOGGING = "true";

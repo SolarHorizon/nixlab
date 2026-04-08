@@ -6,7 +6,7 @@
 in {
   flake.modules.nixos.anchorr = {
     virtualisation.oci-containers.containers.anchorr = {
-      image = "docker.io/nairdah/anchorr:latest";
+      image = "docker.io/nairdah/anchorr:latest@sha256:27092fe19d166ebeb73d97374d17678324bd901850a8806e2de3a97e91e683a2";
       serviceName = "anchorr";
       environment = {
         WEBHOOK_PORT = portStr;

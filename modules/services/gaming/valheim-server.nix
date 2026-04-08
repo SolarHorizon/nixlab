@@ -26,7 +26,7 @@ in {
 
     virtualisation.oci-containers.containers.valheim-server = {
       serviceName = "valheim-server";
-      image = "ghcr.io/lloesche/valheim-server:latest";
+      image = "ghcr.io/lloesche/valheim-server:latest@sha256:20fde516ce311e6084f82f295c9eb6934af57b357c657937a04f62bdf5946149";
       environment = {
         SERVER_NAME = "friends club";
         WORLD_NAME = "friendclubland";

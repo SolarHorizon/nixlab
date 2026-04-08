@@ -25,7 +25,7 @@ in {
 
     # Containers
     virtualisation.oci-containers.containers."wordpress-db" = {
-      image = "mariadb:11";
+      image = "mariadb:11@sha256:345fa26d595e8c7fe298e0c4098ed400356f502458769c8902229b3437d6da2b";
       environment = {
         MARIADB_DATABASE = "wordpress";
         MARIADB_USER = "wordpress";
@@ -44,7 +44,7 @@ in {
     };
 
     virtualisation.oci-containers.containers."wordpress-wordpress" = {
-      image = "wordpress:6-apache";
+      image = "wordpress:6-apache@sha256:831ada79c1047b109150924b194e4f57eee614ce1b41e18847608f62d884b955";
       environment = {
         WORDPRESS_DB_HOST = "db";
         WORDPRESS_DB_NAME = "wordpress";

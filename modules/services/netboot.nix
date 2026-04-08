@@ -10,6 +10,29 @@
   dataDir = "/srv/netboot";
 in {
   flake.modules.nixos.netboot = {
+    config,
+    pkgs,
+    ...
+  }: {
+    sops.secrets."netboot/smb_password" = {
+      sopsFile = ../../secrets/services/netboot.yaml;
+    };
+
+    systemd.services.netboot-smbpasswd = {
+      description = "Set Samba password for matt (netboot share)";
+      after = ["samba-smbd.service"];
+      requires = ["samba-smbd.service"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = ''
+        password=$(cat ${config.sops.secrets."netboot/smb_password".path})
+        printf '%s\n%s\n' "$password" "$password" | ${pkgs.samba}/bin/smbpasswd -s -a matt
+      '';
+    };
+
     users.groups."${group}".gid = gid;
     users.users."${user}" = {
       isSystemUser = true;
@@ -24,7 +47,7 @@ in {
     ];
 
     virtualisation.oci-containers.containers.netboot = {
-      image = "ghcr.io/netbootxyz/netbootxyz:0.7.3";
+      image = "ghcr.io/netbootxyz/netbootxyz:latest";
       environment = {
         PGID = toString gid;
         PUID = toString uid;
@@ -66,6 +89,7 @@ in {
           "browseable" = "yes";
           "read only" = "yes";
           "guest ok" = "yes";
+          "write list" = "matt";
           "force user" = user;
           "force group" = group;
         };

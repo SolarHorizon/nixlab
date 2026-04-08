@@ -8,11 +8,16 @@
       sopsFile = ../../../secrets/services/renovate.yaml;
     };
 
+    sops.secrets."renovate/github-token" = {
+      sopsFile = ../../../secrets/services/renovate.yaml;
+    };
+
     services.renovate = {
       enable = true;
       schedule = "*:0/30";
       credentials = {
         RENOVATE_TOKEN = config.sops.secrets."renovate/forgejo-token".path;
+        GITHUB_COM_TOKEN = config.sops.secrets."renovate/github-token".path;
       };
       environment = {
         LOG_LEVEL = "debug";

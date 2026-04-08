@@ -14,6 +14,9 @@
       credentials = {
         RENOVATE_TOKEN = config.sops.secrets."renovate/forgejo-token".path;
       };
+      environment = {
+        LOG_LEVEL = "debug";
+      };
       runtimePackages = [pkgs.nix];
       settings = {
         platform = "forgejo";

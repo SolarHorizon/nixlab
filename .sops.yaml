@@ -25,6 +25,11 @@ creation_rules:
       - age:
         - *host_monolith
         - *admin_matt
+  - path_regex: secrets/services/renovate.yaml
+    key_groups:
+      - age:
+        - *host_monolith
+        - *admin_matt
   # - path_regex: secrets/services/homepage.yaml
   #   key_groups:
   #     - age:

@@ -11,7 +11,7 @@
 
     config.media-server = {
       group = "media";
-      gid = 16778;
+      gid = 10000;
     };
   };
 

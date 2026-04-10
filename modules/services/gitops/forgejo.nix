@@ -4,13 +4,14 @@
   httpPort = 3100;
   sshPort = 22;
 in {
-  flake.modules.nixos.forgejo = {
+  flake.modules.nixos.forgejo = {pkgs, ...}: {
     services.openssh.settings = {
       AcceptEnv = "GIT_PROTOCOL";
     };
 
     services.forgejo = {
       enable = true;
+      package = pkgs.forgejo; # the default is forgejo-lts
       database.type = "sqlite3";
       lfs = {
         enable = true;
